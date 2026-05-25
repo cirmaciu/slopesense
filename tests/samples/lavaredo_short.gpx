@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="slopesense-fixture-generator" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata><name>Lavaredo Short (test fixture)</name></metadata>
+  <trk>
+    <name>Lavaredo Short (test fixture)</name>
+    <trkseg>
+      <trkpt lat="46.600000" lon="12.300000"><ele>1000.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.302600"><ele>1020.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.305200"><ele>1040.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.307800"><ele>1060.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.310400"><ele>1080.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.313000"><ele>1100.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.315600"><ele>1120.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.318200"><ele>1140.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.320800"><ele>1160.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.323400"><ele>1180.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.326000"><ele>1200.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.328600"><ele>1220.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.331200"><ele>1240.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.333800"><ele>1260.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.336400"><ele>1280.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.339000"><ele>1300.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.341600"><ele>1320.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.344200"><ele>1340.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.346800"><ele>1360.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.349400"><ele>1380.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.352000"><ele>1400.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.354600"><ele>1380.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.357200"><ele>1360.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.359800"><ele>1340.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.362400"><ele>1320.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.365000"><ele>1300.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.367600"><ele>1280.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.370200"><ele>1260.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.372800"><ele>1240.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.375400"><ele>1220.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.378000"><ele>1200.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.380600"><ele>1180.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.383200"><ele>1160.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.385800"><ele>1140.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.388400"><ele>1120.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.391000"><ele>1100.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.393600"><ele>1080.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.396200"><ele>1060.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.398800"><ele>1040.0</ele></trkpt>
+      <trkpt lat="46.600000" lon="12.401400"><ele>1020.0</ele></trkpt>
+    </trkseg>
+  </trk>
+</gpx>
