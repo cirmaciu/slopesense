@@ -42,6 +42,24 @@ export function classify(type: SectionType, absGrade: number): Runability {
   return "runnable_easy";
 }
 
+/** Three-level effort grouping that mirrors the chart's color palette. */
+export type EffortLevel = "easy" | "mid" | "steep";
+
+const EFFORT_OF: Record<Runability, EffortLevel> = {
+  runnable_easy: "easy",
+  runnable_mod: "easy",
+  tough_run: "mid",
+  mixed: "mid",
+  hike_only: "steep",
+  very_steep: "steep",
+};
+
+/** Map a 6-level runability onto the 3-level effort scale used for coloring
+ * and for splitting long sections into runnable / mixed / hike sub-sections. */
+export function effortLevel(r: Runability): EffortLevel {
+  return EFFORT_OF[r];
+}
+
 const LABELS: Record<Runability, string> = {
   runnable_easy: "Runnable",
   runnable_mod: "Runnable (mod)",

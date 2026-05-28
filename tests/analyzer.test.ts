@@ -49,13 +49,17 @@ describe("analyze — end-to-end on the fixture", () => {
     expect(result.totalDescent).toBe(356);
   });
 
-  it("finds exactly one climb followed by one descent", () => {
+  it("identifies a climb-then-descent route (climbs before descents)", () => {
     const climbs = result.sections.filter((s) => s.type === "climb");
     const descents = result.sections.filter((s) => s.type === "descent");
-    expect(climbs).toHaveLength(1);
-    expect(descents).toHaveLength(1);
+    expect(climbs.length).toBeGreaterThanOrEqual(1);
+    expect(descents.length).toBeGreaterThanOrEqual(1);
     expect(result.sections[0].type).toBe("climb");
     expect(result.sections.at(-1)?.type).toBe("descent");
+    // every climb starts before every descent
+    const lastClimbKm = Math.max(...climbs.map((s) => s.kmStart));
+    const firstDescentKm = Math.min(...descents.map((s) => s.kmStart));
+    expect(lastClimbKm).toBeLessThan(firstDescentKm);
   });
 
   it("locates the high point near the 4 km peak", () => {
@@ -96,5 +100,47 @@ describe("analyze — guards and edge cases", () => {
       ele: 100 + i,
     }));
     expect(analyze(pts).warnings.length).toBeGreaterThan(0);
+  });
+});
+
+describe("analyze — sub-section splitting by effort level", () => {
+  // 0.0009° lon at the equator ≈ 100 m per step, ignoring elevation.
+  // First 30 steps gain +5 m each → ~5% (easy effort: runnable_mod).
+  // Next 30 steps gain +16 m each → ~16% (steep effort: hike_only).
+  // Smoothing softens the boundary; we tolerate a transition section.
+  const climbPoints: Trackpoint[] = (() => {
+    const pts: Trackpoint[] = [{ lat: 0, lon: 0, ele: 100 }];
+    let ele = 100;
+    for (let i = 1; i <= 30; i++) {
+      ele += 5;
+      pts.push({ lat: 0, lon: i * 0.0009, ele });
+    }
+    for (let i = 31; i <= 60; i++) {
+      ele += 16;
+      pts.push({ lat: 0, lon: i * 0.0009, ele });
+    }
+    return pts;
+  })();
+
+  it("splits one long climb into multiple sub-sections by effort", () => {
+    const r = analyze(climbPoints);
+    const climbs = r.sections.filter((s) => s.type === "climb");
+    expect(climbs.length).toBeGreaterThanOrEqual(2);
+    // The earlier section should be gentler than a later one.
+    const first = climbs[0];
+    const last = climbs[climbs.length - 1];
+    expect(Math.abs(last.avgGrade)).toBeGreaterThan(Math.abs(first.avgGrade));
+  });
+
+  it("keeps a single section when the gradient stays in one effort level", () => {
+    // Uniform ~6% climb (runnable_mod, easy effort throughout).
+    const pts: Trackpoint[] = [{ lat: 0, lon: 0, ele: 100 }];
+    let ele = 100;
+    for (let i = 1; i <= 40; i++) {
+      ele += 6;
+      pts.push({ lat: 0, lon: i * 0.0009, ele });
+    }
+    const climbs = analyze(pts).sections.filter((s) => s.type === "climb");
+    expect(climbs).toHaveLength(1);
   });
 });

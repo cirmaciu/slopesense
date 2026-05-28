@@ -5,7 +5,7 @@
 // into fixed-distance buckets -> group contiguous buckets into sections ->
 // classify each section.
 
-import { classify, type SectionType } from "./classify";
+import { classify, effortLevel, type SectionType } from "./classify";
 import { cumulativeDistances } from "./geo";
 import type { ProfilePoint, RouteAnalysis, Section, Trackpoint } from "./types";
 
@@ -131,19 +131,30 @@ function buildSection(group: Bucket[]): Section {
   };
 }
 
+// Grouping key per bucket: same direction *and* same effort level
+// (easy / mid / steep). This means a long climb gets split where the gradient
+// crosses a classification boundary, so the table and chart show the runnable
+// approach and the steep kicker as separate sub-sections. Flats group together
+// regardless of grade since they're all "flat" by definition.
+function bucketKey(grade: number): string {
+  const dir = direction(grade);
+  if (dir === "flat") return "flat";
+  return `${dir}|${effortLevel(classify(dir, Math.abs(grade)))}`;
+}
+
 function groupSections(buckets: Bucket[]): Section[] {
   const sections: Section[] = [];
   let group: Bucket[] = [];
-  let groupDir: SectionType | null = null;
+  let key: string | null = null;
   for (const bucket of buckets) {
-    const dir = direction(bucket.grade);
-    if (groupDir === null || dir === groupDir) {
+    const k = bucketKey(bucket.grade);
+    if (key === null || k === key) {
       group.push(bucket);
-      groupDir = dir;
+      key = k;
     } else {
       sections.push(buildSection(group));
       group = [bucket];
-      groupDir = dir;
+      key = k;
     }
   }
   if (group.length > 0) sections.push(buildSection(group));
