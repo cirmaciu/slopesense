@@ -56,6 +56,9 @@ export default function ElevationChart({
   const minE = Math.min(...eles);
   const maxE = Math.max(...eles);
   const pad = Math.max(30, Math.round((maxE - minE) * 0.15));
+  // Clamp the x-axis to the actual route length so the chart doesn't trail
+  // off into empty space when Chart.js rounds the axis to a tidy number.
+  const lastKm = profile[profile.length - 1]?.km ?? 0;
 
   const grid = dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.07)";
   const tick = dark ? "#a8a29e" : "#57534e";
@@ -107,6 +110,8 @@ export default function ElevationChart({
     scales: {
       x: {
         type: "linear",
+        min: 0,
+        max: lastKm,
         title: { display: true, text: "Distance (km)", color: tick },
         grid: { color: grid },
         ticks: { color: tick, maxTicksLimit: 8 },
